@@ -54,7 +54,7 @@ sudo apt-get update
 
 ## 📥 Шаг 2 — Установка пакетов
 
-Устанавливаем `PostgreSQL 17`, `contrib` и `pgAdmin 4` одной командой:
+Устанавливаем PostgreSQL 17, contrib и pgAdmin 4 одной командой:
 
 ```bash
 sudo apt-get install -y postgresql17 postgresql17-server postgresql17-contrib pgadmin4
@@ -175,19 +175,25 @@ sudo EVENTLET_NO_GREENDNS=yes python3 /usr/lib/pgadmin4/setup.py add-user admin@
 ### Управление PostgreSQL
 
 ```bash
-sudo systemctl start postgresql      # Запуск
-sudo systemctl stop postgresql       # Остановка
-sudo systemctl restart postgresql    # Перезапуск
-sudo systemctl status postgresql     # Статус
+sudo systemctl start postgresql           # Запуск
+sudo systemctl stop postgresql            # Остановка
+sudo systemctl restart postgresql         # Перезапуск
+sudo systemctl status postgresql          # Статус
+sudo systemctl enable postgresql          # Добавить в автозагрузку
+sudo systemctl disable postgresql         # Убрать из автозагрузки
+sudo systemctl disable --now postgresql   # Убрать из автозагрузки и остановить
 ```
 
 ### Управление pgAdmin 4
 
 ```bash
-sudo systemctl start pgadmin4        # Запуск
-sudo systemctl stop pgadmin4         # Остановка
-sudo systemctl restart pgadmin4      # Перезапуск
-sudo systemctl status pgadmin4       # Статус
+sudo systemctl start pgadmin4             # Запуск
+sudo systemctl stop pgadmin4              # Остановка
+sudo systemctl restart pgadmin4           # Перезапуск
+sudo systemctl status pgadmin4            # Статус
+sudo systemctl enable pgadmin4            # Добавить в автозагрузку
+sudo systemctl disable pgadmin4           # Убрать из автозагрузки
+sudo systemctl disable --now pgadmin4     # Убрать из автозагрузки и остановить
 ```
 
 ### Работа с psql
