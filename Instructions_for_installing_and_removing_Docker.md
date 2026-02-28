@@ -98,6 +98,7 @@ docker-compose --version
 | `sudo service docker start` | Запуск службы |
 | `sudo service docker stop` | Остановка службы |
 | `sudo systemctl enable docker` | Добавление в автозагрузку |
+| `sudo systemctl disable docker` | Удаление из автозагрузки |
 
 ### Запуск службы и добавление в автозагрузку
 
