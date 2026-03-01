@@ -1,165 +1,180 @@
-# Руководство по установке PyCharm в ALT Linux
+# 🐍 Установка PyCharm на ALT Workstation K 11.2
 
-## Содержание
-- [Руководство по установке PyCharm в ALT Linux](#руководство-по-установке-pycharm-в-alt-linux)
-  - [Содержание](#содержание)
-  - [Предварительные требования](#предварительные-требования)
-  - [Шаг 1: Скачивание PyCharm](#шаг-1-скачивание-pycharm)
-  - [Шаг 2: Установка PyCharm](#шаг-2-установка-pycharm)
-  - [Шаг 3: Создание символической ссылки](#шаг-3-создание-символической-ссылки)
-  - [Шаг 4: Создание ярлыка в меню приложений](#шаг-4-создание-ярлыка-в-меню-приложений)
-  - [Первый запуск](#первый-запуск)
-  - [Полезные команды](#полезные-команды)
-  - [Дополнительная информация](#дополнительная-информация)
+![OS](https://img.shields.io/badge/OS-ALT_Workstation_K_11.2-4A90D9?style=for-the-badge&logo=linux&logoColor=white)
+![PyCharm](https://img.shields.io/badge/PyCharm-2025.x-21D789?style=for-the-badge&logo=pycharm&logoColor=white)
+![Arch](https://img.shields.io/badge/Arch-x86__64-ED8B00?style=for-the-badge&logo=intel&logoColor=white)
+![Status](https://img.shields.io/badge/Статус-Проверено-success?style=for-the-badge)
 
 ---
 
-## Предварительные требования
+## 📋 Содержание
 
-Перед установкой PyCharm убедитесь, что в вашей системе установлен Python:
-
-```bash
-python3 --version
-```
-
-Если Python не установлен, установите его. Смотри эту [ссылку](https://github.com/DataSithAi/Python314-alt-linux-install) 👀
-
----
-
-## Шаг 1: Скачивание PyCharm
-
-Перейдите на официальный сайт JetBrains и скачайте PyCharm для Linux:
-
-🔗 **https://www.jetbrains.com/pycharm/download/**
-
-Или скачайте напрямую через терминал:
-
-```bash
-cd ~/Загрузки
-wget https://download.jetbrains.com/python/pycharm-2025.2.3.tar.gz
-```
-
-> **Примечание:** С 2024 года PyCharm представлен в виде единого продукта с базовыми функциями (бывший Community Edition) бесплатно и опциональными Professional-функциями с 30-дневной пробной версией.
+1. [Требования](#-требования)
+2. [Скачивание PyCharm](#-шаг-1--скачивание-pycharm)
+3. [Установка](#-шаг-2--установка)
+4. [Первый запуск](#-шаг-3--первый-запуск)
+5. [Создание ярлыка в меню](#-шаг-4--создание-ярлыка-в-меню)
+6. [Исправление ярлыка](#-шаг-5--исправление-ярлыка-нативный-запуск)
+7. [Готово](#-готово)
+8. [Удаление PyCharm](#-удаление-pycharm)
 
 ---
 
-## Шаг 2: Установка PyCharm
+## ✅ Требования
 
-Распакуйте скачанный архив в директорию `/opt`:
+![RAM](https://img.shields.io/badge/RAM-минимум_4GB-blue?style=flat-square)
+![Disk](https://img.shields.io/badge/Диск-минимум_3.5GB-blue?style=flat-square)
+![Python](https://img.shields.io/badge/Python-3.x-yellow?style=flat-square&logo=python)
+
+- Операционная система: **ALT Workstation K 11.2 (Nemorosa) x86_64**
+- Права **sudo** для установки в `/opt/`
+- Подключение к интернету
+
+---
+
+## 📥 Шаг 1 — Скачивание PyCharm
+
+Перейдите на официальный сайт JetBrains и скачайте архив:
+
+> 🔗 **https://www.jetbrains.com/pycharm/download/**
+
+Выберите версию для **Linux** (файл с расширением `.tar.gz`):
+
+---
+
+## 🔧 Шаг 2 — Установка
+
+### 2.1 Создайте директорию в `/opt/`
 
 ```bash
-sudo tar -xzf ~/Загрузки/pycharm-2025.2.3.tar.gz -C /opt/
+sudo mkdir -p /opt/pycharm
 ```
 
-Проверьте, что файлы успешно распакованы:
+### 2.2 Распакуйте архив
+
+```bash
+sudo tar -xzf ~/Загрузки/pycharm-*.tar.gz -C /opt/
+```
+
+> ⏳ Распаковка занимает около 20–30 секунд.
+
+### 2.3 Проверьте результат
 
 ```bash
 ls /opt/
 ```
 
-Вы должны увидеть папку `pycharm-2025.2.3`.
+Вы должны увидеть папку `pycharm-20XX.X.X`:
 
----
-
-## Шаг 3: Создание символической ссылки
-
-Для удобного запуска PyCharm из любой директории создайте символическую ссылку:
-
-```bash
-sudo ln -s /opt/pycharm-2025.2.3/bin/pycharm.sh /usr/local/bin/pycharm
 ```
-
-Теперь вы можете запускать PyCharm простой командой:
-
-```bash
-pycharm
+drwxr-xr-x  root  root  /opt/pycharm-2025.3.3
 ```
 
 ---
 
-## Шаг 4: Создание ярлыка в меню приложений
-
-Создайте desktop-файл для отображения PyCharm в меню приложений:
+## 🚀 Шаг 3 — Первый запуск
 
 ```bash
-sudo nano /usr/share/applications/pycharm.desktop
+/opt/pycharm-*/bin/pycharm
 ```
 
-Вставьте следующее содержимое:
-
-```ini
-[Desktop Entry]
-Version=1.0
-Type=Application
-Name=PyCharm
-Icon=/opt/pycharm-2025.2.3/bin/pycharm.svg
-Exec=/opt/pycharm-2025.2.3/bin/pycharm.sh
-Comment=Python IDE
-Categories=Development;IDE;
-Terminal=false
-```
-
-Сохраните файл:
-- Нажмите `Ctrl+O` (сохранить)
-- Нажмите `Enter` (подтвердить имя файла)
-- Нажмите `Ctrl+X` (выйти из редактора)
+> 💡 При первом запуске PyCharm создаст проект по умолчанию и откроет страницу «Что нового».
 
 ---
 
-## Первый запуск
+## 🖥️ Шаг 4 — Создание ярлыка в меню
 
-Запустите PyCharm одним из способов:
+Чтобы запускать PyCharm из меню приложений, создайте Desktop Entry:
 
-**Из терминала:**
-```bash
-pycharm
+В меню PyCharm выберите:
+
+```
+Tools → Create Desktop Entry
 ```
 
-**Или через меню приложений:**
-Найдите PyCharm в меню приложений вашей системы (раздел "Разработка" или "Development").
+В появившемся окне:
 
-При первом запуске:
-1. Выберите **"Do not import settings"** (если это первая установка)
-2. Примите лицензионное соглашение
-3. Настройте тему оформления (светлая/тёмная)
-4. Выберите плагины (можно оставить по умолчанию)
+- ☐ **Без галочки** — ярлык только для текущего пользователя *(рекомендуется)*
+- ☑ **С галочкой** — ярлык для всех пользователей *(требует sudo)*
 
-При создании первого проекта PyCharm автоматически обнаружит установленный Python интерпретатор.
+Нажмите **OK**.
 
 ---
 
-## Полезные команды
+## 🛠️ Шаг 5 — Исправление ярлыка (нативный запуск)
 
-**Запуск PyCharm:**
+По умолчанию ярлык запускает PyCharm через скрипт `pycharm.sh`, из-за чего появляется уведомление:
+
+> ⚠️ *"The IDE seems to be launched with a script launcher. Please consider switching to a native launcher for better experience."*
+
+Исправим это одной командой — заменим `pycharm.sh` на нативный бинарник `pycharm`:
+
 ```bash
-pycharm
+sed -i 's|bin/pycharm.sh|bin/pycharm|g' ~/.local/share/applications/jetbrains-pycharm.desktop
 ```
 
-**Прямой запуск из директории установки:**
+Проверьте результат:
+
 ```bash
-/opt/pycharm-2025.2.3/bin/pycharm.sh
+grep Exec ~/.local/share/applications/jetbrains-pycharm.desktop
 ```
 
-**Проверка версии Python:**
-```bash
-python3 --version
+Ожидаемый вывод:
+
+```
+Exec="/opt/pycharm-2025.3.3/bin/pycharm" %f
 ```
 
-**Удаление PyCharm (если потребуется):**
-```bash
-sudo rm -rf /opt/pycharm-2025.2.3
-sudo rm /usr/local/bin/pycharm
-sudo rm /usr/share/applications/pycharm.desktop
-```
+✅ Теперь уведомление больше не появится!
 
 ---
 
-## Дополнительная информация
+## 🎉 Готово!
 
-- 📚 Официальная документация: https://www.jetbrains.com/help/pycharm/
-- 🆘 Поддержка: https://www.jetbrains.com/support/pycharm/
-- 🐍 Python документация: https://docs.python.org/
+![Done](https://img.shields.io/badge/Установка-Завершена-brightgreen?style=for-the-badge&logo=checkmarx&logoColor=white)
+
+PyCharm успешно установлен и настроен. Теперь вы можете:
+
+- Запускать PyCharm **из меню приложений** — без лишних уведомлений
+- Запускать PyCharm **из терминала**: `/opt/pycharm-*/bin/pycharm`
 
 ---
 
-**Готово!** PyCharm успешно установлен и готов к работе. Приятной разработки! 🚀
+## 🗑️ Удаление PyCharm
+
+![Uninstall](https://img.shields.io/badge/Удаление-Полное-red?style=for-the-badge&logo=trash&logoColor=white)
+
+### 1. Удалите папку с программой
+
+```bash
+sudo rm -rf /opt/pycharm-2025.3.3
+sudo rm -rf /opt/pycharm
+```
+
+### 2. Удалите ярлык из меню
+
+```bash
+rm -f ~/.local/share/applications/jetbrains-pycharm.desktop
+```
+
+### 3. Удалите настройки и кэш
+
+```bash
+rm -rf ~/.config/JetBrains/PyCharm*
+rm -rf ~/.cache/JetBrains/PyCharm*
+rm -rf ~/.local/share/JetBrains/PyCharm*
+```
+
+### 4. Проверьте, что всё удалено
+
+```bash
+ls /opt/ | grep pycharm
+ls ~/.local/share/applications/ | grep pycharm
+ls ~/.config/JetBrains/ 2>/dev/null
+```
+
+> ✅ Если команды ничего не вывели — PyCharm удалён полностью.
+
+---
+
+*Инструкция проверена на ALT Workstation K 11.2 (Nemorosa) x86_64 · PyCharm 2025.3.3*
