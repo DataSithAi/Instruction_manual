@@ -24,6 +24,7 @@
   - [🖥️ Шаг 7 — Подключение к PostgreSQL в pgAdmin](#️-шаг-7--подключение-к-postgresql-в-pgadmin)
     - [Вкладка General](#вкладка-general)
     - [Вкладка Соединение](#вкладка-соединение)
+    - [Смена пароля pgAdmin](#смена-пароля-pgadmin)
   - [🛠️ Полезные команды](#️-полезные-команды)
     - [Управление PostgreSQL](#управление-postgresql)
     - [Управление pgAdmin 4](#управление-pgadmin-4)
@@ -123,8 +124,10 @@ pgAdmin 4 запускается на порту **8765** (`http://localhost:876
 Создаём администратора для входа в веб-интерфейс pgAdmin:
 
 ```bash
-sudo EVENTLET_NO_GREENDNS=yes python3 /usr/lib/pgadmin4/setup.py add-user admin@local.com 'ВашПароль' --admin
+sudo EVENTLET_NO_GREENDNS=yes python3 /usr/lib/pgadmin4/setup.py add-user admin@local.com 'MyPassword123' --admin
 ```
+
+> ⚠️ **Важно:** Замените `MyPassword123` на свой надёжный пароль. **Запомните его** — он понадобится для входа в веб-интерфейс pgAdmin.
 
 **Ожидаемый вывод:**
 
@@ -142,11 +145,21 @@ sudo EVENTLET_NO_GREENDNS=yes python3 /usr/lib/pgadmin4/setup.py add-user admin@
 
 > 💡 Переменная `EVENTLET_NO_GREENDNS=yes` необходима для обхода бага совместимости между `eventlet` и `trio`.
 
+> 🔒 **Если аккаунт заблокирован:** pgAdmin блокирует учётную запись после 3 неверных попыток входа. Для разблокировки выполните:
+> ```bash
+> sudo sqlite3 /var/lib/pgadmin4/pgadmin4.sql "UPDATE user SET login_attempts=0 WHERE email='admin@local.com';"
+> sudo systemctl restart pgadmin4
+> ```
+
 ---
 
 ## 🖥️ Шаг 7 — Подключение к PostgreSQL в pgAdmin
 
-Откройте браузер и перейдите на `http://localhost:8765`. Войдите с данными из шага 6.
+Откройте браузер и перейдите на `http://localhost:8765`. Войдите с данными из шага 6:
+- **Email:** `admin@local.com`
+- **Пароль:** тот, что вы указали в команде на шаге 6
+
+![Главная страница pgAdmin после входа](images/step6-pgadmin-home.png)
 
 Добавьте сервер через **Объект → Регистрация → Сервер**:
 
@@ -166,7 +179,23 @@ sudo EVENTLET_NO_GREENDNS=yes python3 /usr/lib/pgadmin4/setup.py add-user admin@
 | Имя пользователя | `postgres` |
 | Пароль | *(пароль из шага 3)* |
 
+> ⚠️ **Важно:** В поле **Имя пользователя** укажите именно `postgres`, а не `admin` или другое имя.
+
 Нажмите **Сохранить** — сервер появится в **Object Explorer** с дашбордом активности.
+
+![Регистрация сервера — вкладка General](images/step7-register-server-general.png)
+
+![Регистрация сервера — вкладка Соединение](images/step7-register-server-connection.png)
+
+![Дашборд PostgreSQL 17](images/step7-dashboard.png)
+
+### Смена пароля pgAdmin
+
+После входа вы можете сменить пароль: нажмите на **`admin@local.com`** в правом верхнем углу → **Сменить пароль**.
+
+![Меню смены пароля](images/step7-change-password-menu.png)
+
+![Диалог смены пароля](images/step7-change-password-dialog.png)
 
 ---
 
