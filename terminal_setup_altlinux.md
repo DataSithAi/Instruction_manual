@@ -22,6 +22,11 @@
 | **Powerlevel10k** | Красивый и быстрый промпт с иконками | GitHub |
 | **zsh-autosuggestions** | Серые подсказки команд из истории | GitHub |
 | **zsh-syntax-highlighting** | Подсветка: зелёный = OK, красный = ошибка | GitHub |
+| **git** | Алиасы для git команд | встроенный |
+| **z** | Быстрая навигация по папкам | встроенный |
+| **sudo** | Двойной ESC добавляет sudo | встроенный |
+| **docker** | Автодополнение docker | встроенный |
+| **docker-compose** | Автодополнение docker-compose | встроенный |
 | **eza** | Современная замена `ls` с иконками | apt-get |
 | **bat** | Замена `cat` с подсветкой синтаксиса | apt-get |
 | **duf** | Замена `df` — красивый вывод дисков | apt-get |
@@ -125,7 +130,7 @@ fc-list | grep "Fira Code"
 |---|---|
 | **VS Code** | `settings.json` → `"editor.fontFamily": "FiraCode Nerd Font"` |
 | **JetBrains IDE** | `File → Settings → Editor → Font` → `FiraCode Nerd Font` |
-| **Konsole** | `kwriteconfig6` |
+| **Konsole** | `Настройки → Профили → Шрифт` или через `kwriteconfig6` |
 | **Vim / Neovim** | Настраивается через терминал, имя `FiraCode Nerd Font` |
 
 ---
@@ -231,6 +236,10 @@ source ~/.zshrc
 
 ## 🔌 Шаг 5 — Установить плагины Oh My Zsh
 
+Плагины бывают двух типов: **встроенные** (уже есть в Oh My Zsh, просто подключаются) и **сторонние** (нужно клонировать с GitHub).
+
+### Сторонние плагины — установить через git clone
+
 [![zsh-autosuggestions](https://img.shields.io/badge/GitHub-zsh--autosuggestions-181717?style=flat-square&logo=github)](https://github.com/zsh-users/zsh-autosuggestions)
 [![zsh-syntax-highlighting](https://img.shields.io/badge/GitHub-zsh--syntax--highlighting-181717?style=flat-square&logo=github)](https://github.com/zsh-users/zsh-syntax-highlighting)
 
@@ -244,10 +253,10 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting \
   ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 ```
 
-### Подключить плагины
+### Подключить все плагины в ~/.zshrc
 
 ```bash
-sed -i 's/plugins=(git)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting)/' ~/.zshrc
+sed -i 's/plugins=(git)/plugins=(git z sudo docker docker-compose zsh-autosuggestions zsh-syntax-highlighting)/' ~/.zshrc
 ```
 
 Проверь:
@@ -255,7 +264,7 @@ sed -i 's/plugins=(git)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting
 ```bash
 grep "^plugins" ~/.zshrc
 # Ожидаемый вывод:
-# plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+# plugins=(git z sudo docker docker-compose zsh-autosuggestions zsh-syntax-highlighting)
 ```
 
 Применяем:
@@ -264,9 +273,17 @@ grep "^plugins" ~/.zshrc
 source ~/.zshrc
 ```
 
-> 💡 **Как работают плагины:**
-> - `zsh-autosuggestions` — серый текст после курсора подсказывает команду из истории. Нажми `→` чтобы принять.
-> - `zsh-syntax-highlighting` — команда подсвечивается **зелёным** если существует, **красным** если нет.
+### Описание всех плагинов
+
+| Плагин | Тип | Что делает |
+|---|---|---|
+| `git` | встроенный | Короткие алиасы: `gst` = `git status`, `gco` = `git checkout` и др. |
+| `z` | встроенный | Быстрый переход в папки по части имени: `z proj` вместо полного пути |
+| `sudo` | встроенный | Двойной `ESC` добавляет `sudo` к предыдущей команде |
+| `docker` | встроенный | Автодополнение команд docker по `Tab` |
+| `docker-compose` | встроенный | Автодополнение команд docker-compose по `Tab` |
+| `zsh-autosuggestions` | сторонний | Серый текст подсказывает команду из истории, `→` чтобы принять |
+| `zsh-syntax-highlighting` | сторонний | Подсвечивает **зелёным** если команда существует, **красным** если нет |
 
 ---
 
