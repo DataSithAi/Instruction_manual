@@ -1,4 +1,4 @@
-# 🖥️ Инструкция по установке шрифта `Fira Code Medium Nerd Font Complete` на операционную систему `ALT Workstation K 11.2` и настройка шрифта в `Konsole` по умолчанию.
+# 🖥️ Установка шрифта Fira Code на Alt Linux
 
 [![Fira Code](https://img.shields.io/badge/Fira%20Code-Nerd%20Font-blueviolet?style=for-the-badge&logo=fontforge&logoColor=white)](https://github.com/tonsky/FiraCode)
 [![Alt Linux](https://img.shields.io/badge/Alt%20Linux-compatible-blue?style=for-the-badge&logo=linux&logoColor=white)](https://www.altlinux.org/)
@@ -110,7 +110,13 @@ kreadconfig6 --file konsolerc --group 'General' --key 'font'
 fc-list | grep "Fira Code"
 ```
 
-Если шрифт установлен — он появится в списке.
+Ожидаемый вывод:
+```
+/usr/share/fonts/Fira Code Medium Nerd Font Complete.ttf: FiraCode Nerd Font:style=Medium,Regular
+```
+
+> ⚠️ **Важно:** системное имя шрифта — `FiraCode Nerd Font` (без пробела между Fira и Code).
+> Именно это имя нужно указывать при настройке приложений.
 
 ---
 
@@ -118,10 +124,10 @@ fc-list | grep "Fira Code"
 
 | Приложение | Путь к настройкам |
 |---|---|
-| **VS Code** | `settings.json` → `"editor.fontFamily": "Fira Code"` |
-| **JetBrains IDE** | `File → Settings → Editor → Font` |
-| **Konsole** | `Настройки → Профили → Шрифт` или через `kwriteconfig6` |
-| **Vim / Neovim** | Настраивается через терминал |
+| **VS Code** | `settings.json` → `"editor.fontFamily": "FiraCode Nerd Font"` |
+| **JetBrains IDE** | `File → Settings → Editor → Font` → ввести `FiraCode Nerd Font` |
+| **Konsole** |`kwriteconfig6` |
+| **Vim / Neovim** | Настраивается через терминал, имя шрифта `FiraCode Nerd Font` |
 
 ---
 
